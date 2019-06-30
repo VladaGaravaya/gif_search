@@ -10,7 +10,9 @@ export default class GifItem extends Component<IGifItemProps> {
     render() {
         return (
             <div className="box">
-                <img src={this.props.url} className='image img-thumbnail' onClick={() => this.props.onClick!(this.props.url)}/>
+                <img src={this.props.url} className='image img-thumbnail' 
+                     onClick={() => this.props.onClick!(this.props.url)}
+                     alt=''/>
                 <div className='saveBox'>
                     Save
                 </div>

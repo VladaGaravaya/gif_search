@@ -19,7 +19,7 @@ export default class Home extends Component {
                 <h1>Hello! All your saved gifs are stored here. But ...</h1>
                 <Link to="/giflist" className='btn btn-outline-dark start'>..start search other cool gifs!</Link>
                 <br></br>
-                {gifs.map( (url: string) => <img src={url} className='saveImg img-thumbnail'/>)}
+                {gifs.map( (url: string) => <img src={url} className='saveImg img-thumbnail' alt=''/>)}
             </div>
         )
     }
