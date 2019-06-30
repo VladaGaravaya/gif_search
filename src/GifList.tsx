@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
-import GifItem from './GifItem'
+import GifItem from './GifItem';
 import './Gif.css'
 
 
@@ -24,9 +24,10 @@ export default class GifList extends Component<{},IGifListState> {
 
     async getImages(value: string) {
         const API_KEY = "A3CQtr8DQVI2kM215yBVSwvdwvJgyMcU";
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
         const API = `https://api.giphy.com/v1/${this.state.type}/search?q=${value}&limit=${this.state.count}&api_key=${API_KEY}`;
 
-        const response = await fetch(API, {mode: 'cors'});
+        const response = await fetch(proxyUrl+API);
         const data = await response.json();
         const mass = data["data"];
         let images: Array<string> = [];
@@ -67,9 +68,7 @@ export default class GifList extends Component<{},IGifListState> {
     }
 
     changeType = (type: string) => {
-        /*this.setState({
-            type: type, 
-        });*/
+        this.state.type = type;
         this.getImages(this.state.value);
     }
 
