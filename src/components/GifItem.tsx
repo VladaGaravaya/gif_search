@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Gif.css'
+import './App.css'
 
 interface IGifItemProps {
     url: string,

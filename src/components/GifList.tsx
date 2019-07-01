@@ -3,7 +3,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import GifItem from './GifItem';
-import './Gif.css'
+import './App.css'
 
 
 interface IGifListState {
@@ -51,18 +51,20 @@ export default class GifList extends Component<{},IGifListState> {
         if(saved) {
             const parseGifs = JSON.parse(saved);
             parseGifs.push(url);
+            alert("You saved this gif(sticker)");
             localStorage.setItem('gifs', JSON.stringify(parseGifs));
         } 
         else {
             const gifs = [];
             gifs.push(url);
+            alert("You saved this gif(sticker)");
             localStorage.setItem('gifs', JSON.stringify(gifs));
         } 
     }
 
     fetchMoreData = () => {
         this.setState ({
-            count: this.state.count+8,
+            count: this.state.count + 8,
         })
         this.getImages(this.state.value);
     }
@@ -79,23 +81,15 @@ export default class GifList extends Component<{},IGifListState> {
                 <Link to="/" className='btn btn-outline-dark back'>&larr; Go back</Link>
                 <SearchBar onChange={this.search}/>
                 <div className="btn-group btn-group-justified">
-                    <button onClick={() => this.changeType('gifs')}
-                            className='btn btn-outline-dark'>
-                                Gifs
-                    </button>
-                    <button onClick={() => this.changeType('stickers')}
-                            className='btn btn-outline-dark'>
-                                Stickers
-                    </button>
+                    <button onClick={() => this.changeType('gifs')} className='btn btn-outline-dark'> Gifs</button>
+                    <button onClick={() => this.changeType('stickers')} className='btn btn-outline-dark'> Stickers</button>
                 </div>
                 <br/>
                 <div className='gifList'>
-                    <InfiniteScroll
-                        dataLength={this.state.gifs.length}
-                        next={this.fetchMoreData}
-                        hasMore={true}
-                        loader={<h4> </h4>}
-                    >
+                    <InfiniteScroll dataLength={this.state.gifs.length}
+                                    next={this.fetchMoreData}
+                                    hasMore={true}
+                                    loader={<h4> </h4>} >
                         {currentGifs.map ( e => <GifItem onClick={this.toLocStor} url={e} key={e}/>)}
                     </InfiniteScroll> 
                 </div> 

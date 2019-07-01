@@ -20,6 +20,6 @@
     "jsx": "preserve"
   },
   "include": [
-    "src"
+    "src", "components/SearchBar.tsx", "components/Home.tsx", "components/App.tsx", "components/GifList.tsx", "components/GifItem.tsx"
   ]
 }

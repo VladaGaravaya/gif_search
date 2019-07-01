@@ -1,8 +1,8 @@
 import React from 'react';
-import GifList from './GifList';
-import Home from './Home'
+import GifList from './components/GifList';
+import Home from './components/Home';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import './App.css'
+import './components/App.css';
 
 const App: React.FC = () => {
   
