@@ -20,7 +20,7 @@ type Data = {
     }
 } 
 
-export default class GifList extends Component<{},IGifListState> {
+export default class GifList extends Component <{}, IGifListState> {
 
     state = {
         gifs: [],

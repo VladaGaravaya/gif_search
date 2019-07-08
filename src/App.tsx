@@ -4,12 +4,12 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import {Loading} from './components/Loading';
 import './components/App.css';
 
-const Home = Loadable ({
+const Home = Loadable({
   loader: () => import('./components/Home'),
   loading: Loading,
 });
 
-const GifList = Loadable ({
+const GifList = Loadable({
   loader: () => import('./components/GifList'),
   loading: Loading,
 });
