@@ -71,8 +71,8 @@ export default class GifList extends Component<{},IGifListState> {
 
     render () { 
         const currentGifs = this.state.gifs;
-        const savedInput = localStorage.getItem('savedInput');
-        if( currentGifs.length === 0 && savedInput) {
+        const savedInput = localStorage.getItem('savedInput') || 'hello';
+        if( currentGifs.length === 0) {
             this.getImages(savedInput);
         }
         return (
@@ -92,7 +92,7 @@ export default class GifList extends Component<{},IGifListState> {
                     <InfiniteScroll dataLength={this.state.gifs.length}
                                     next={this.fetchMoreData}
                                     hasMore={true}
-                                    loader={<h4> </h4>} >
+                                    loader={<h4> Loading...</h4>} >
                         {currentGifs.map ( e => <GifItem onClick={this.toLocStor} url={e} key={e}/>)}
                     </InfiniteScroll> 
                 </div> 
