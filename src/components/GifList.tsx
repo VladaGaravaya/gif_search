@@ -49,14 +49,6 @@ export default class GifList extends Component<{},IGifListState> {
         this.getImages(value);
     }
 
-    toLocStor = (url: string) => {
-        const saved = localStorage.getItem('gifs') || '';
-        const parseGifs = (saved === '')? [] : JSON.parse(saved);
-        parseGifs.push(url);
-        alert("You saved this gif(sticker)");
-        localStorage.setItem('gifs', JSON.stringify(parseGifs));
-    }
-
     fetchMoreData = () => {
         this.setState ({
             count: this.state.count + 8,
@@ -71,7 +63,7 @@ export default class GifList extends Component<{},IGifListState> {
 
     render () { 
         const currentGifs = this.state.gifs;
-        const savedInput = localStorage.getItem('savedInput') || 'hello';
+        const savedInput = localStorage.getItem('savedInput') || 'hello';//подгружает последний запрос или выводит гифки с приветствием
         if( currentGifs.length === 0) {
             this.getImages(savedInput);
         }
@@ -93,7 +85,7 @@ export default class GifList extends Component<{},IGifListState> {
                                     next={this.fetchMoreData}
                                     hasMore={true}
                                     loader={<h4> Loading...</h4>} >
-                        {currentGifs.map ( e => <GifItem onClick={this.toLocStor} url={e} key={e}/>)}
+                        {currentGifs.map ( e => <GifItem url={e} key={e}/>)}
                     </InfiniteScroll> 
                 </div> 
             </div>

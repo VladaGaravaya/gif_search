@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getSavedGifs} from './LocalStorage';
 import './App.css'
-
-function getSavedGifs () {
-    const gifs = localStorage.getItem('gifs') || '';
-    return (gifs === '')? [] : JSON.parse(gifs);
-} 
 
 const Home = () => {
     const gifs = getSavedGifs();

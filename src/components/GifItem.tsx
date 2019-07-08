@@ -3,14 +3,13 @@ import './App.css'
 
 interface IGifItemProps {
     url: string,
-    onClick: (str: string) => void,
 }
 
 const GifItem = (props: IGifItemProps) => {
     return (
         <div className="box">
             <img src={props.url} className='image img-thumbnail' 
-                 onClick={() => props.onClick!(props.url)}
+                 onClick={() => import('./LocalStorage').then( module => module.toLocStor(props.url))}
                  alt=''
             />
             <div className='saveBox'>

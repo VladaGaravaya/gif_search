@@ -1,11 +1,8 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import {Loading} from './components/Loading';
 import './components/App.css';
-
-function Loading() {
-  return <div>Loading...</div>;
-}
 
 const Home = Loadable ({
   loader: () => import('./components/Home'),
@@ -18,7 +15,6 @@ const GifList = Loadable ({
 });
 
 const App: React.FC = () => {
-  
   return (
     <HashRouter>
         <div className="App">
