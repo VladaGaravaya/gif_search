@@ -1,8 +1,21 @@
 import React from 'react';
-import GifList from './components/GifList';
-import Home from './components/Home';
+import Loadable from 'react-loadable';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './components/App.css';
+
+function Loading() {
+  return <div>Loading...</div>;
+}
+
+const Home = Loadable ({
+  loader: () => import('./components/Home'),
+  loading: Loading,
+});
+
+const GifList = Loadable ({
+  loader: () => import('./components/GifList'),
+  loading: Loading,
+});
 
 const App: React.FC = () => {
   

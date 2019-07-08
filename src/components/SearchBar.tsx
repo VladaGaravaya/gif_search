@@ -9,9 +9,7 @@ interface ISearchState {
     value: string,
 }
 
-
 export default class Search extends Component<ISearchProps,ISearchState> {
-
     state = {
         value: '',
     }
@@ -24,7 +22,6 @@ export default class Search extends Component<ISearchProps,ISearchState> {
                      <button className="btn btn-outline-secondary bar" type="button" onClick={() => this.props.onChange(this.state.value)}>Search</button>
                  </div>
             </div>
-           
         )
     }
 }

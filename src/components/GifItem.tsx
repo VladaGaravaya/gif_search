@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css'
 
 interface IGifItemProps {
@@ -6,17 +6,18 @@ interface IGifItemProps {
     onClick: (str: string) => void,
 }
 
-export default class GifItem extends Component<IGifItemProps> {
-    render() {
-        return (
-            <div className="box">
-                <img src={this.props.url} className='image img-thumbnail' 
-                     onClick={() => this.props.onClick!(this.props.url)}
-                     alt=''/>
-                <div className='saveBox'>
-                    Save
-                </div>
+const GifItem = (props: IGifItemProps) => {
+    return (
+        <div className="box">
+            <img src={props.url} className='image img-thumbnail' 
+                 onClick={() => props.onClick!(props.url)}
+                 alt=''
+            />
+            <div className='saveBox'>
+                <img src="https://img.icons8.com/plasticine/100/000000/like.png"/>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
+export default GifItem;

@@ -5,13 +5,20 @@ import SearchBar from './SearchBar';
 import GifItem from './GifItem';
 import './App.css'
 
-
 interface IGifListState {
     gifs: Array<string>,
     value: string,
     count: number,
     type: string,
 }
+
+type Data = {
+    images: {
+        original: {
+            url: string
+        }
+    }
+} 
 
 export default class GifList extends Component<{},IGifListState> {
 
@@ -28,44 +35,32 @@ export default class GifList extends Component<{},IGifListState> {
         const API = `https://api.giphy.com/v1/${this.state.type}/search?q=${value}&limit=${this.state.count}&api_key=${API_KEY}`;
 
         const response = await fetch(proxyUrl+API);
-        const data = await response.json();
-        const mass = data["data"];
-        let images: Array<string> = [];
-        mass.forEach((element: any) => {
-            images = [...images, element['images']['original']['url']]
-        });
+        const dataJSON = await response.json();
+        const data = dataJSON.data;
+        const massUrls = data.map((element: Data) => { return element.images.original.url });
         this.setState({
-            gifs: images,
+            gifs: massUrls,
+            value: value,
         });
     }
 
     search = (value: string) => {
-        this.setState({
-            value: value,
-        });
+        localStorage.savedInput = value;
         this.getImages(value);
     }
 
     toLocStor = (url: string) => {
-        const saved = localStorage.getItem('gifs');
-        if(saved) {
-            const parseGifs = JSON.parse(saved);
-            parseGifs.push(url);
-            alert("You saved this gif(sticker)");
-            localStorage.setItem('gifs', JSON.stringify(parseGifs));
-        } 
-        else {
-            const gifs = [];
-            gifs.push(url);
-            alert("You saved this gif(sticker)");
-            localStorage.setItem('gifs', JSON.stringify(gifs));
-        } 
+        const saved = localStorage.getItem('gifs') || '';
+        const parseGifs = (saved === '')? [] : JSON.parse(saved);
+        parseGifs.push(url);
+        alert("You saved this gif(sticker)");
+        localStorage.setItem('gifs', JSON.stringify(parseGifs));
     }
 
     fetchMoreData = () => {
         this.setState ({
             count: this.state.count + 8,
-        })
+        });
         this.getImages(this.state.value);
     }
 
@@ -76,13 +71,21 @@ export default class GifList extends Component<{},IGifListState> {
 
     render () { 
         const currentGifs = this.state.gifs;
+        const savedInput = localStorage.getItem('savedInput');
+        if( currentGifs.length === 0 && savedInput) {
+            this.getImages(savedInput);
+        }
         return (
             <div className='bar'>
                 <Link to="/" className='btn btn-outline-dark back'>&larr; Go back</Link>
                 <SearchBar onChange={this.search}/>
-                <div className="btn-group btn-group-justified">
-                    <button onClick={() => this.changeType('gifs')} className='btn btn-outline-dark'> Gifs</button>
-                    <button onClick={() => this.changeType('stickers')} className='btn btn-outline-dark'> Stickers</button>
+                <div className="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label className={(this.state.type === 'gifs')? "btn btn-secondary active" : "btn btn-secondary"}>
+                        <input type="radio" onClick={() => this.changeType('gifs')}/> Gifs
+                    </label>
+                    <label className={(this.state.type !== 'gifs')? "btn btn-secondary active" : "btn btn-secondary"}>
+                        <input type="radio" onClick={() => this.changeType('stickers')}/> Stickers
+                    </label>
                 </div>
                 <br/>
                 <div className='gifList'>

@@ -30,17 +30,12 @@ body {
 }
 
 .image:hover {
-  opacity: 0;
+  opacity: 0.1;
 }
 
-.saveBox {
-  position: absolute;
-  background-color: white;
-  top: 30%;
-  left: 30%;
-  font-size: 40px;
+.saveBox{
   padding: 10px;
-  border: 2px solid grey;
+  margin: 35px auto auto 40px;
 }
 
 .box {
@@ -63,7 +58,10 @@ body {
 .btn-group {
   position: relative;
   left: 415px;
-  background-color: white;
+}
+
+.btn {
+  cursor: pointer;
 }
 
 .click {
@@ -97,3 +95,4 @@ h1 {
   font-family: 'Courier New', Courier, monospace;
   text-align: center;
 }
+
